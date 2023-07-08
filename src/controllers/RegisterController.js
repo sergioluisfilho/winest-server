@@ -1,10 +1,9 @@
-const createUser = require("../services/createUser");
+import { createUser } from "../services/createUser";
 
 class RegisterController {
   static async create(req, res) {
-    const { user } = req.body;
     try {
-      const userId = await createUser(user);
+      const userId = await createUser(req.body);
       return res.status(201).send(`User ${userId} created successfully`);
     } catch (error) {
       console.log(error);
@@ -13,4 +12,4 @@ class RegisterController {
   }
 }
 
-module.exports = RegisterController;
+export default RegisterController;

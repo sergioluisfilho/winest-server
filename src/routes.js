@@ -1,6 +1,7 @@
-const { Router } = require("express");
-const routes = new Router();
-const RegisterController = require("./controllers/RegisterController");
+import { Router } from "express";
+import RegisterController from "./controllers/RegisterController";
+
+const routes = Router();
 
 routes.post("/register", RegisterController.create);
 
@@ -9,4 +10,4 @@ routes.get("/", (req, res) => {
   return res.send("Connected");
 });
 
-module.exports = routes;
+export default routes;

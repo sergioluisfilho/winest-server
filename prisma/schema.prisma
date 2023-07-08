@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Wine {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String
+  priceAverage Float
+  labels       String[]
+  image        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Notification {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  type          String
+  destinatary   User     @relation(fields: [destinataryId], references: [id])
+  destinataryId Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([postId, userId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  content   String
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String    @db.VarChar(255)
+  content   String
+  published Boolean   @default(false)
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
+  imgSource String?
+  Like      Like[]
+  Comment   Comment[]
+}
+
+model Story {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  imgSource String
+  createdAt DateTime @default(now())
+}
+
+model Chat {
+  id           Int       @id @default(autoincrement())
+  createdAt    DateTime  @default(now())
+  participants User[]
+  messages     Message[]
+}
+
+model Message {
+  id       Int    @id @default(autoincrement())
+  text     String
+  senderId Int
+  Chat     Chat?  @relation(fields: [chatsId], references: [id])
+  chatsId  Int?
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String
+  email         String         @unique
+  password      String
+  birthday      DateTime?
+  phone         String?
+  bio           String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  favoriteWines Int[]
+  posts         Post[]
+  Story         Story[]
+  Notification  Notification[]
+  Like          Like[]
+  Comment       Comment[]
+  Chats         Chat[]
+}
