@@ -1,7 +1,7 @@
-var jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 const SECRET = "secret";
 
-module.exports = (payload) => {
+export const generateToken = (payload) => {
   return jwt.sign(
     {
       data: payload,
