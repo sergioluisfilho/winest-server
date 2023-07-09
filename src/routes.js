@@ -11,6 +11,7 @@ routes.post("/login", LoginController.auth);
 
 routes.post("/posts", PostController.create);
 routes.get("/posts", PostController.show);
+routes.post("/posts/:id/like", PostController.like);
 
 routes.get("/", authorize, (req, res) => {
   console.log("ok");

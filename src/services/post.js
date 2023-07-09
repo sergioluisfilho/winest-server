@@ -47,3 +47,22 @@ export const listPosts = async ({ offset, limit }) => {
     };
   }
 };
+
+export const likePost = async (id) => {
+  try {
+    const posts = await prisma.like.create({
+      data: {},
+    });
+
+    return {
+      status: 201,
+      data: { posts },
+    };
+  } catch (error) {
+    console.error("Ocorreu um erro:", error);
+    return {
+      status: 500,
+      data: error,
+    };
+  }
+};
