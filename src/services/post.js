@@ -48,15 +48,18 @@ export const listPosts = async ({ offset, limit }) => {
   }
 };
 
-export const likePost = async (id) => {
+export const likePost = async (postId, id) => {
   try {
-    const posts = await prisma.like.create({
-      data: {},
+    const likePost = await prisma.like.create({
+      data: {
+        postId: +postId,
+        userId: id,
+      },
     });
 
     return {
       status: 201,
-      data: { posts },
+      data: { likePost },
     };
   } catch (error) {
     console.error("Ocorreu um erro:", error);

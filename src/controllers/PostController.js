@@ -13,7 +13,8 @@ class PostController {
 
   static async like(req, res) {
     const postId = req.params.id;
-    const { status, data } = await likePost(postId);
+    const { id } = req.user;
+    const { status, data } = await likePost(postId, id);
     return res.status(status).send(data);
   }
 }

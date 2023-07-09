@@ -36,9 +36,9 @@ model Like {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   postId    Int
-  post      Post     @relation(fields: [postId], references: [id])
+  // post      Post     @relation(fields: [postId], references: [id])
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  // user      User     @relation(fields: [userId], references: [id])
 
   @@unique([postId, userId])
 }
@@ -48,9 +48,9 @@ model Comment {
   createdAt DateTime @default(now())
   content   String
   postId    Int
-  post      Post     @relation(fields: [postId], references: [id])
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  Post      Post     @relation(fields: [postId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Post {
@@ -58,12 +58,11 @@ model Post {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   content   String
-  author    User      @relation(fields: [authorId], references: [id])
+  // author    User      @relation(fields: [authorId], references: [id])
   authorId  Int
   imgSource String?
-  likes     Int
-  Like      Like[]
   Comment   Comment[]
+  // Like      Like[]
 }
 
 model Story {
@@ -100,10 +99,10 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   favoriteWines Int[]
-  posts         Post[]
+  // posts         Post[]
   Story         Story[]
   Notification  Notification[]
-  Like          Like[]
+  // Like          Like[]
   Comment       Comment[]
   Chats         Chat[]
 }
