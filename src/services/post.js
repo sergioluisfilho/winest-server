@@ -58,6 +58,18 @@ export const listPosts = async ({ offset, limit }) => {
             },
           },
         },
+        Like: {
+          select: {
+            id: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
       },
     });
 

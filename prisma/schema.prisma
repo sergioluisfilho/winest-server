@@ -36,9 +36,9 @@ model Like {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   postId    Int
-  // post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
   userId    Int
-  // user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@unique([postId, userId])
 }
@@ -62,7 +62,7 @@ model Post {
   authorId  Int
   imgSource String?
   Comment   Comment[]
-  // Like      Like[]
+  Like      Like[]
 }
 
 model Story {
@@ -101,8 +101,8 @@ model User {
   favoriteWines Int[]
   Story         Story[]
   Notification  Notification[]
-  // Like          Like[]
   Comment       Comment[]
   Chats         Chat[]
   Post          Post[]
+  Like          Like[]
 }
