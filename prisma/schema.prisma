@@ -28,6 +28,7 @@ model Notification {
   type          String
   destinatary   User     @relation(fields: [destinataryId], references: [id])
   destinataryId Int
+  isRead        Boolean
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -89,20 +90,21 @@ model Message {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  name          String
-  email         String         @unique
-  password      String
-  birthday      DateTime?
-  phone         String?
-  bio           String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  favoriteWines Int[]
-  Story         Story[]
-  Notification  Notification[]
-  Comment       Comment[]
-  Chats         Chat[]
-  Post          Post[]
-  Like          Like[]
+  id                Int            @id @default(autoincrement())
+  name              String
+  email             String         @unique
+  password          String
+  birthday          DateTime?
+  phone             String?
+  bio               String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  favoriteWines     Int[]
+  profilePictureUrl String?
+  Story             Story[]
+  Notification      Notification[]
+  Comment           Comment[]
+  Chats             Chat[]
+  Post              Post[]
+  Like              Like[]
 }
