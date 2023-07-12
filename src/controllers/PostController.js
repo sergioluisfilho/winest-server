@@ -1,4 +1,4 @@
-import { createPost, listPosts, likePost } from "../services/post";
+import { createPost, listPosts } from "../services/post";
 
 class PostController {
   static async create(req, res) {
@@ -8,13 +8,6 @@ class PostController {
 
   static async show(req, res) {
     const { status, data } = await listPosts(req.query);
-    return res.status(status).send(data);
-  }
-
-  static async like(req, res) {
-    const postId = req.params.id;
-    const { id } = req.user;
-    const { status, data } = await likePost(postId, id);
     return res.status(status).send(data);
   }
 }

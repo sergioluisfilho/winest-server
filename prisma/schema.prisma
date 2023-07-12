@@ -58,7 +58,7 @@ model Post {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   content   String
-  // author    User      @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
   authorId  Int
   imgSource String?
   Comment   Comment[]
@@ -105,4 +105,5 @@ model User {
   // Like          Like[]
   Comment       Comment[]
   Chats         Chat[]
+  Post          Post[]
 }

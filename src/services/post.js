@@ -11,7 +11,6 @@ export const createPost = async ({ content, authorId, imgSource }) => {
           },
         },
         imgSource,
-        likes: 0,
       },
     });
 
@@ -38,28 +37,6 @@ export const listPosts = async ({ offset, limit }) => {
     return {
       status: 200,
       data: { posts },
-    };
-  } catch (error) {
-    console.error("Ocorreu um erro:", error);
-    return {
-      status: 500,
-      data: error,
-    };
-  }
-};
-
-export const likePost = async (postId, id) => {
-  try {
-    const likePost = await prisma.like.create({
-      data: {
-        postId: +postId,
-        userId: id,
-      },
-    });
-
-    return {
-      status: 201,
-      data: { likePost },
     };
   } catch (error) {
     console.error("Ocorreu um erro:", error);
