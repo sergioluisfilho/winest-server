@@ -32,6 +32,33 @@ export const listPosts = async ({ offset, limit }) => {
     const posts = await prisma.post.findMany({
       skip: +offset,
       take: +limit,
+      select: {
+        id: true,
+        createdAt: true,
+        imgSource: true,
+        content: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        Comment: {
+          select: {
+            id: true,
+            createdAt: true,
+            content: true,
+            postId: true,
+            userId: true,
+            User: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
 
     return {

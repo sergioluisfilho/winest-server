@@ -18,6 +18,7 @@ export const login = async ({ email, password }) => {
         bio: true,
         password: false, // Exclui o campo de senha
         favoriteWines: true,
+        Post: true,
       },
     });
 

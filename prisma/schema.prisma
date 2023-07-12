@@ -99,7 +99,6 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   favoriteWines Int[]
-  // posts         Post[]
   Story         Story[]
   Notification  Notification[]
   // Like          Like[]
