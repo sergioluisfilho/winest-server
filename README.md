@@ -2,6 +2,8 @@
 
 Requisitos: Node.js, Docker, Docker Compose, vscode extensão Prisma
 
+# Antes de tudo crie um arquivo .env na raiz do projeto e preencha-o igual mostra o arquivo .env.example
+
 # Criar imagens:
 
 Windows: docker-compose up -d
