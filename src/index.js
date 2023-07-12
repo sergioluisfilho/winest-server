@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(routes);
 
 const server = http.createServer(app);
-const io = socketIO(server);
 
 server.listen(3000);
 console.log("Servidor iniciou");
