@@ -8,6 +8,7 @@ import CommentController from "./controllers/CommentController";
 import NotificationController from "./controllers/NotificationController";
 
 import { prisma } from "./db/prisma";
+import { handleSendMessage } from "./utils/messageEmitter";
 
 import { authorize } from "./middlewares/authorize";
 import { upload } from "./aws/s3";
@@ -65,6 +66,8 @@ routes.get("/chats/:id", authorize, async (req, res) => {
 });
 
 routes.post("/message/:id", authorize, async (req, res) => {
+  const senderId = req.user.id;
+  const destinataryId = parseInt(req.params.id);
   let chat;
   chat = await prisma.chat.findFirst({
     // Verifica se há um chat entre o usuario que faz a request e o receptor da mensagem
@@ -83,14 +86,14 @@ routes.post("/message/:id", authorize, async (req, res) => {
         {
           participants: {
             some: {
-              id: req.user.id,
+              id: senderId,
             },
           },
         },
         {
           participants: {
             some: {
-              id: +req.params.id,
+              id: destinataryId,
             },
           },
         },
@@ -98,14 +101,14 @@ routes.post("/message/:id", authorize, async (req, res) => {
     },
   });
 
-  if (chat.length === 0) {
+  if (!chat || chat.length === 0) {
     // se não houver, cria um chat novo entre esses dois usuários
     chat = await prisma.chat.create({
       data: {
         participants: {
           connect: [
-            { id: req.user.id }, // ID do primeiro usuário
-            { id: +req.params.id }, // ID do segundo usuário
+            { id: senderId }, // ID do primeiro usuário
+            { id: destinataryId }, // ID do segundo usuário
           ],
         },
       },
@@ -122,10 +125,12 @@ routes.post("/message/:id", authorize, async (req, res) => {
   const message = await prisma.message.create({
     data: {
       text: req.body.text,
-      senderId: req.user.id,
+      senderId,
       chatsId: chatId,
     },
   });
+
+  handleSendMessage(destinataryId, senderId, message);
 
   return res.status(200).send(message);
 });

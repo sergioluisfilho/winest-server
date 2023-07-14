@@ -47,3 +47,7 @@ io.on("connection", (socket) => {
 
 server.listen(3000);
 console.log("Servidor iniciou");
+
+export function getClient() {
+  return clients;
+}
