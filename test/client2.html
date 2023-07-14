@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client 2</title>
+</head>
+<body>
+  <input type="text" id="messageInput" placeholder="Digite sua mensagem">
+    <button onclick="sendMessage()">Enviar</button>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+<script>
+  const socket = io('http://localhost:3000', {
+    query: {
+      userId: 1,
+    }
+  });
+
+  socket.on("messageSentConfirmation", (data) => {
+    console.log('confirmed', data);
+  });
+
+  socket.on("messageFailedConfirmation", (data) => {
+    console.log('User not connected but a push notification will be sent to it', data);
+  });
+
+  socket.on("notification", (data) => {
+    console.log('New notification, you should refetch: ', data);
+  });
+
+  socket.on("messageReceived", (data) => {
+    console.log('New message, you should refetch: ', data);
+  });
+
+  function sendMessage() {
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value;
+
+        socket.emit('sendMessage', {
+          text: message,
+          destinataryId: 1,
+        });
+
+        messageInput.value = ""; // Limpa o campo de entrada após o envio
+      }
+</script>
+</body>
+</html>

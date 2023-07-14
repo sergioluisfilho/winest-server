@@ -82,11 +82,12 @@ model Chat {
 }
 
 model Message {
-  id       Int    @id @default(autoincrement())
-  text     String
-  senderId Int
-  Chat     Chat?  @relation(fields: [chatsId], references: [id])
-  chatsId  Int?
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  text      String
+  senderId  Int
+  Chat      Chat     @relation(fields: [chatsId], references: [id])
+  chatsId   Int
 }
 
 model User {
