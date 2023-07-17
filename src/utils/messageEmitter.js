@@ -16,3 +16,15 @@ export const handleSendMessage = (destinataryId, senderId, data) => {
     );
   }
 };
+
+export const handleSendNotification = (destinataryId, senderId, data) => {
+  try {
+    console.table({ destinataryId, senderId, data });
+  } catch (error) {
+    console.log(error);
+    // sender.emit(
+    //   "User not connected but a push notification will be sent to it",
+    //   { error }
+    // );
+  }
+};

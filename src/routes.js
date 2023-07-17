@@ -4,8 +4,9 @@ import LikeController from "./controllers/LikeController";
 import LoginController from "./controllers/LoginController";
 import PostController from "./controllers/PostController";
 import CommentController from "./controllers/CommentController";
-// import ProfileController from "./controllers/ProfileController";
+import ChatController from "./controllers/ChatController";
 import NotificationController from "./controllers/NotificationController";
+// import ProfileController from "./controllers/ProfileController";
 
 import { prisma } from "./db/prisma";
 import { handleSendMessage } from "./utils/messageEmitter";
@@ -27,43 +28,9 @@ routes.get("/posts", authorize, PostController.show);
 routes.post("/posts/:id/like", authorize, LikeController.like);
 routes.delete("/posts/:id/like", authorize, LikeController.unlike);
 routes.post("/posts/:id/comments", authorize, CommentController.createComment);
-
 routes.get("/", (req, res) => res.send("Connected"));
-
-routes.get("/chats", authorize, async (req, res) => {
-  const messages = await prisma.chat.findMany({
-    where: {
-      participants: {
-        some: {
-          id: req.user.id,
-        },
-      },
-    },
-    select: {
-      id: true,
-      createdAt: true,
-      participants: true,
-    },
-  });
-
-  return res.status(200).json(messages);
-});
-
-routes.get("/chats/:id", authorize, async (req, res) => {
-  const messages = await prisma.chat.findFirst({
-    where: {
-      id: +req.params.id,
-    },
-    select: {
-      id: true,
-      createdAt: true,
-      messages: true,
-      participants: true,
-    },
-  });
-
-  return res.status(200).json(messages);
-});
+routes.get("/chats", authorize, ChatController.show);
+routes.get("/chats/:id", authorize, ChatController.index);
 
 routes.post("/message/:id", authorize, async (req, res) => {
   const senderId = req.user.id;
