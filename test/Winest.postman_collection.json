@@ -49,37 +49,13 @@
 					"response": []
 				},
 				{
-					"name": "Verify-token",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/auth/verify-token",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"auth",
-								"verify-token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sergio6\",\r\n    \"password\": \"123\",\r\n    \"name\": \"Sérgio Cruz\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
+							"raw": "{\r\n    \"email\": \"arhu3r@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"name\": \"Sérgio Cruz\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,7 +78,112 @@
 		},
 		{
 			"name": "Chat",
-			"item": []
+			"item": [
+				{
+					"name": "Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Teste texto mensagem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/message/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"message",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one chat info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Teste texto mensagem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/chats/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chats",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user chats data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/chats",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Notifications",
@@ -111,7 +192,70 @@
 					"name": "Create Notification",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Título\",\r\n    \"description\": \"descrição\",\r\n    \"type\": \"padrão\",\r\n    \"destinataryId\": 14\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/notifications",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualize notification",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Título\",\r\n    \"description\": \"descrição\",\r\n    \"type\": \"padrão\",\r\n    \"destinataryId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/notifications/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notifications",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -119,23 +263,22 @@
 					"name": "View all notifications",
 					"request": {
 						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Visualize notification",
-					"request": {
-						"method": "POST",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Visualize all notifications",
-					"request": {
-						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/notifications",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
 					},
 					"response": []
 				}
@@ -231,7 +374,38 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlike post",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/posts/:id/like",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id",
+										"like"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
 										}
 									]
 								}
@@ -284,7 +458,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"Top 10 vinhos do mercado\",\r\n    \"authorId\": 1,\r\n    \"imgSource\": \"https://aquitemplacas.com.br/img/produtos/g/36-atencao-area-de-teste.jpg\"\r\n}",
+									"raw": "{\r\n    \"content\": \"Top 10 primos de alírio\",\r\n    \"authorId\": 1,\r\n    \"imgSource\": \"https://aquitemplacas.com.br/img/produtos/g/36-atencao-area-de-teste.jpg\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -302,14 +476,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Unlike post",
-							"request": {
-								"method": "DELETE",
-								"header": []
-							},
-							"response": []
 						}
 					]
 				},
@@ -320,15 +486,39 @@
 							"name": "Comment post",
 							"request": {
 								"method": "POST",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "View post comments",
-							"request": {
-								"method": "GET",
-								"header": []
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Adorei o post!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/posts/:id/comments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id",
+										"comments"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
 							},
 							"response": []
 						}
