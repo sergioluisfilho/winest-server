@@ -13,6 +13,18 @@ class ProfileController {
     const { status, data } = await updateProfile(id, body);
     return res.status(status).send(data);
   }
+
+  static async upload(req, res) {
+    const { id } = req.user;
+    if (!req.file) {
+      return res.status(400).send("Nenhum arquivo foi enviado.");
+    }
+    const fileUrl = req.file.location; // Obtém a URL de acesso à imagem
+    const { status, data } = await updateProfile(id, {
+      profilePictureUrl: fileUrl,
+    });
+    return res.status(status).send(data);
+  }
 }
 
 export default ProfileController;

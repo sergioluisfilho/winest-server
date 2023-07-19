@@ -1,16 +1,16 @@
 import { prisma } from "../db/prisma";
 
-export const createPost = async ({ content, authorId, imgSource }) => {
+export const createPost = async ({ content, authorId }, image) => {
   try {
     const post = await prisma.post.create({
       data: {
         content,
         author: {
           connect: {
-            id: authorId,
+            id: +authorId,
           },
         },
-        imgSource,
+        imgSource: image,
       },
     });
 
@@ -54,6 +54,7 @@ export const listPosts = async ({ offset, limit }) => {
               select: {
                 id: true,
                 name: true,
+                profilePictureUrl: true,
               },
             },
           },

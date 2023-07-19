@@ -18,14 +18,14 @@ import { upload } from "./aws/s3";
 const routes = Router();
 
 routes.post("/register", RegisterController.create);
-routes.post("/login", LoginController.auth);
+routes.post("/auth/login", LoginController.auth);
 routes.get("/profile", authorize, ProfileController.index);
 routes.put("/profile", authorize, ProfileController.update);
 routes.get("/page/:id", authorize, PageController.index);
 routes.get("/notifications", authorize, NotificationController.show);
 routes.put("/notifications/:id", authorize, NotificationController.update);
 routes.post("/notifications", authorize, NotificationController.create);
-routes.post("/posts", authorize, PostController.create);
+routes.post("/posts", authorize, upload.single("image"), PostController.create);
 routes.get("/posts", authorize, PostController.show);
 routes.post("/posts/:id/like", authorize, LikeController.like);
 routes.delete("/posts/:id/like", authorize, LikeController.unlike);
@@ -39,11 +39,12 @@ routes.get("/wines/:id", authorize, WineController.index);
 routes.get("/favorites/wines", authorize, FavoriteWineController.show);
 routes.post("/favorites/wines/:id", authorize, FavoriteWineController.create);
 routes.delete("/favorites/wines/:id", authorize, FavoriteWineController.remove);
-
 //routes.post("wines/sugest", authorize, WineController.create);
-
-routes.post("/upload", upload.single("image"), async (req, res) => {
-  return res.send();
-});
+routes.post(
+  "/profile/picture/upload",
+  authorize,
+  upload.single("image"),
+  ProfileController.upload
+);
 
 export default routes;

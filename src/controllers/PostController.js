@@ -2,7 +2,7 @@ import { createPost, listPosts } from "../services/post";
 
 class PostController {
   static async create(req, res) {
-    const { status, data } = await createPost(req.body);
+    const { status, data } = await createPost(req.body, req.file?.location);
     return res.status(status).send(data);
   }
 

@@ -22,7 +22,8 @@ export const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, file.originalname); // Nome do arquivo no bucket
+      const fileName = Date.now() + "-" + file.originalname; // Nome do arquivo no bucket
+      cb(null, fileName);
     },
   }),
 });

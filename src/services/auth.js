@@ -17,7 +17,7 @@ export const login = async ({ email, password }) => {
         phone: true,
         bio: true,
         password: false, // Exclui o campo de senha
-        favoriteWines: true,
+        FavoriteWine: true,
         Post: true,
       },
     });
