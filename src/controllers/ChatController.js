@@ -1,38 +1,14 @@
-import { prisma } from "../db/prisma";
+import { getChats, getChatData } from "../services/chat";
 
 class ChatController {
   static async show(req, res) {
-    const messages = await prisma.chat.findMany({
-      where: {
-        participants: {
-          some: {
-            id: req.user.id,
-          },
-        },
-      },
-      select: {
-        id: true,
-        createdAt: true,
-        participants: true,
-      },
-    });
-
-    return res.status(200).json(messages);
+    const { status, data } = await getChats(req.user.id);
+    return res.status(status).json(data);
   }
-  static async index(req, res) {
-    const messages = await prisma.chat.findFirst({
-      where: {
-        id: +req.params.id,
-      },
-      select: {
-        id: true,
-        createdAt: true,
-        messages: true,
-        participants: true,
-      },
-    });
 
-    return res.status(200).json(messages);
+  static async index(req, res) {
+    const { status, data } = await getChatData(+req.params.id);
+    return res.status(status).json(data);
   }
 }
 
