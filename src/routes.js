@@ -36,9 +36,9 @@ routes.get("/chats/:id", authorize, ChatController.index);
 routes.post("/message/:id", authorize, MessageController.create);
 routes.get("/wines", authorize, WineController.show);
 routes.get("/wines/:id", authorize, WineController.index);
-routes.get("/wines/favorites", authorize, FavoriteWineController.show);
-routes.post("/wines/favorites/:id", authorize, FavoriteWineController.create);
-routes.delete("/wines/favorites/:id", authorize, FavoriteWineController.remove);
+routes.get("/favorites/wines", authorize, FavoriteWineController.show);
+routes.post("/favorites/wines/:id", authorize, FavoriteWineController.create);
+routes.delete("/favorites/wines/:id", authorize, FavoriteWineController.remove);
 
 //routes.post("wines/sugest", authorize, WineController.create);
 
