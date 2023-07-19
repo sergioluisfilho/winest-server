@@ -9,6 +9,8 @@ import MessageController from "./controllers/MessageController";
 import NotificationController from "./controllers/NotificationController";
 import ProfileController from "./controllers/ProfileController";
 import PageController from "./controllers/PageController";
+import WineController from "./controllers/WineController";
+import FavoriteWineController from "./controllers/FavoriteWineController";
 
 import { authorize } from "./middlewares/authorize";
 import { upload } from "./aws/s3";
@@ -32,6 +34,13 @@ routes.get("/", (req, res) => res.send("Connected"));
 routes.get("/chats", authorize, ChatController.show);
 routes.get("/chats/:id", authorize, ChatController.index);
 routes.post("/message/:id", authorize, MessageController.create);
+routes.get("/wines", authorize, WineController.show);
+routes.get("/wines/:id", authorize, WineController.index);
+routes.get("/wines/favorites", authorize, FavoriteWineController.show);
+routes.post("/wines/favorites/:id", authorize, FavoriteWineController.create);
+routes.delete("/wines/favorites/:id", authorize, FavoriteWineController.remove);
+
+//routes.post("wines/sugest", authorize, WineController.create);
 
 routes.post("/upload", upload.single("image"), async (req, res) => {
   return res.send();
