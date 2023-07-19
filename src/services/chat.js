@@ -2,7 +2,7 @@ import { prisma } from "../db/prisma";
 
 export const getChats = async (senderId) => {
   try {
-    const messages = await prisma.chat.findMany({
+    const chats = await prisma.chat.findMany({
       where: {
         participants: {
           some: {
@@ -13,13 +13,19 @@ export const getChats = async (senderId) => {
       select: {
         id: true,
         createdAt: true,
-        participants: true,
+        participants: {
+          select: {
+            id: true,
+            name: true,
+            profilePictureUrl: true,
+          },
+        },
       },
     });
 
     return {
       status: 200,
-      data: { messages },
+      data: { chats },
     };
   } catch (error) {
     console.error("Ocorreu um erro:", error);

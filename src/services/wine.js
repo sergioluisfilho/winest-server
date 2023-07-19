@@ -12,9 +12,7 @@ export const getWines = async (offset, limit, search) => {
     }
     // Do the same thing for any param you want to filter/search
     const wines = await prisma.wine.findMany({
-      where: {
-        title: { contains: search },
-      },
+      where: whereCondition,
       skip: +offset,
       take: +limit,
     });

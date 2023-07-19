@@ -11,6 +11,7 @@ import ProfileController from "./controllers/ProfileController";
 import PageController from "./controllers/PageController";
 import WineController from "./controllers/WineController";
 import FavoriteWineController from "./controllers/FavoriteWineController";
+import UserController from "./controllers/UserController";
 
 import { authorize } from "./middlewares/authorize";
 import { upload } from "./aws/s3";
@@ -39,6 +40,7 @@ routes.get("/wines/:id", authorize, WineController.index);
 routes.get("/favorites/wines", authorize, FavoriteWineController.show);
 routes.post("/favorites/wines/:id", authorize, FavoriteWineController.create);
 routes.delete("/favorites/wines/:id", authorize, FavoriteWineController.remove);
+routes.get("/users/search", authorize, UserController.show);
 //routes.post("wines/sugest", authorize, WineController.create);
 routes.post(
   "/profile/picture/upload",
