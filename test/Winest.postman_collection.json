@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sergio6\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"sergio@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -55,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"arhu3r@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"name\": \"Sérgio Cruz\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
+							"raw": "{\r\n    \"email\": \"marcos@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"name\": \"Sérgio Cruz\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +92,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Teste texto mensagem\"\r\n}",
+							"raw": "{\r\n    \"text\": \"Teste arquitetura\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -111,7 +111,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "14"
+									"value": "2"
 								}
 							]
 						}
@@ -120,9 +120,6 @@
 				},
 				{
 					"name": "get one chat info",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -132,15 +129,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Teste texto mensagem\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{url}}/chats/:id",
 							"host": [
@@ -153,7 +141,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "10"
+									"value": "2"
 								}
 							]
 						}
@@ -285,28 +273,7 @@
 			]
 		},
 		{
-			"name": "Profile (your)",
-			"item": [
-				{
-					"name": "View profile",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Edit profile",
-					"request": {
-						"method": "PUT",
-						"header": []
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Users",
+			"name": "Profile",
 			"item": [
 				{
 					"name": "followers",
@@ -330,17 +297,89 @@
 					]
 				},
 				{
-					"name": "page",
-					"item": [
-						{
-							"name": "View user profile page",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
+					"name": "View profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Edit profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sérgio Cruz\",\n    \"email\": \"sergio@gmail.com\",\n    \"birthday\": null,\n    \"phone\": \"81997974949\",\n    \"bio\": \"21y\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View user profile page",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/page/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"page",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -374,7 +413,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "5"
+											"value": "1"
 										}
 									]
 								}
@@ -405,7 +444,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "5"
+											"value": "1"
 										}
 									]
 								}
@@ -515,7 +554,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "5"
+											"value": "1"
 										}
 									]
 								}
@@ -559,44 +598,168 @@
 			"name": "Wines",
 			"item": [
 				{
-					"name": "View wines",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
+					"name": "Wine",
+					"item": [
+						{
+							"name": "View wines",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/wines?offset=0&limit=10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wines"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": "jean",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View wine summary data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/wines/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
-					"name": "Add to favorites",
-					"request": {
-						"method": "POST",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Remove from favorites",
-					"request": {
-						"method": "DELETE",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "View wine summary data",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Favorites list",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "Add to favorites",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/favorites/wines/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"favorites",
+										"wines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove from favorites",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/favorites/wines/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"favorites",
+										"wines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Favorites list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/favorites/wines",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"favorites",
+										"wines"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "sugest wine",
