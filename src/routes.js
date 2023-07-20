@@ -12,7 +12,7 @@ import PageController from "./controllers/PageController";
 import WineController from "./controllers/WineController";
 import FavoriteWineController from "./controllers/FavoriteWineController";
 import UserController from "./controllers/UserController";
-// import StoryController from "./controllers/StoryController";
+import StoryController from "./controllers/StoryController";
 
 import { authorize } from "./middlewares/authorize";
 import { upload } from "./aws/s3";
@@ -49,8 +49,13 @@ routes.post(
   upload.single("image"),
   ProfileController.upload
 );
-// routes.post("/stories", authorize, StoryController.create);
-// routes.get("/stories", authorize, StoryController.show);
-// routes.post("/stories/:id", authorize, StoryController.index);
+routes.post(
+  "/story",
+  authorize,
+  upload.single("media"),
+  StoryController.create
+);
+routes.get("/stories", authorize, StoryController.show);
+routes.get("/story/:id", authorize, StoryController.index);
 
 export default routes;
