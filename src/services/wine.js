@@ -1,4 +1,10 @@
 import { prisma } from "../db/prisma";
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 export const getWines = async (offset, limit, search) => {
   try {
@@ -39,6 +45,26 @@ export const getWine = async (id) => {
     return {
       status: 200,
       data: wine,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      data: error,
+    };
+  }
+};
+
+export const getOpenAiSugestion = async (text) => {
+  try {
+    const chatCompletion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: text }],
+    });
+    console.log(chatCompletion.data.choices[0].message);
+    return {
+      status: 200,
+      data: chatCompletion.data.choices[0].message,
     };
   } catch (error) {
     console.error(error);

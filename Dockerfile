@@ -4,11 +4,14 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm i
+RUN npm install -g prisma
+RUN npm install
 
 COPY . .
 
+RUN prisma generate
+RUN prisma migrate deploy --preview-feature
+
 EXPOSE 3000
 
-CMD npm run dev
-
+CMD npm run start

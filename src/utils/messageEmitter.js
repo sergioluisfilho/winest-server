@@ -17,9 +17,12 @@ export const handleSendMessage = (destinataryId, senderId, data) => {
   }
 };
 
-export const handleSendNotification = (destinataryId, senderId, data) => {
+export const handleSendNotification = (destinataryId, data) => {
   try {
-    console.table({ destinataryId, senderId, data });
+    console.table({ destinataryId, data });
+    const clients = getClient();
+    const destinatary = clients[destinataryId];
+    destinatary.emit("newNotification", data);
   } catch (error) {
     console.log(error);
     // sender.emit(

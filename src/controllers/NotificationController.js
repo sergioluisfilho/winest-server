@@ -3,6 +3,7 @@ import {
   getNotifications,
   updateNotification,
 } from "../services/notification";
+import { handleSendNotification } from "../utils/messageEmitter";
 
 class NotificationController {
   static async show(req, res) {
@@ -13,6 +14,7 @@ class NotificationController {
 
   static async create(req, res) {
     const { status, data } = await createNotification(req.body);
+    handleSendNotification(req.body.destinataryId, data);
     return res.status(status).send(data);
   }
 
