@@ -37,11 +37,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/login",
+							"raw": "{{url}}/auth/login",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"auth",
 								"login"
 							]
 						}
@@ -55,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"marcos@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"name\": \"Sérgio Cruz\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
+							"raw": "{\r\n    \"email\": \"teste3@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"name\": \"teste\",\r\n    \"birthday_date\": \"2001-07-05\",\r\n    \"phone\": \"81997974949\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +93,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Teste arquitetura\"\r\n}",
+							"raw": "{\r\n    \"text\": \"Oi shell\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -111,7 +112,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						}
@@ -141,7 +142,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
@@ -189,7 +190,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Título\",\r\n    \"description\": \"descrição\",\r\n    \"type\": \"padrão\",\r\n    \"destinataryId\": 14\r\n}",
+							"raw": "{\r\n    \"title\": \"Título\",\r\n    \"description\": \"descrição\",\r\n    \"type\": \"padrão\",\r\n    \"destinataryId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,89 +298,164 @@
 					]
 				},
 				{
-					"name": "View profile",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/profile",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Edit profile",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Sérgio Cruz\",\n    \"email\": \"sergio@gmail.com\",\n    \"birthday\": null,\n    \"phone\": \"81997974949\",\n    \"bio\": \"21y\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "User profile",
+					"item": [
+						{
+							"name": "update profile picture",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/sergiocruzfilho/Desktop/demo.mov"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/profile/picture/upload",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile",
+										"picture",
+										"upload"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{url}}/profile",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"profile"
-							]
+						{
+							"name": "View profile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit profile",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Sérgio Cruz\",\n    \"email\": \"sergio@gmail.com\",\n    \"birthday\": null,\n    \"phone\": \"81997974949\",\n    \"bio\": \"21y\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "View user profile page",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/page/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"page",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
+					"name": "page",
+					"item": [
+						{
+							"name": "View user profile page",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/page/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"page",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "Search user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/users/search?term=marcos",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "term",
+											"value": "marcos"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
@@ -413,7 +489,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "3"
 										}
 									]
 								}
@@ -444,7 +520,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "3"
 										}
 									]
 								}
@@ -497,12 +573,55 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"Top 10 primos de alírio\",\r\n    \"authorId\": 1,\r\n    \"imgSource\": \"https://aquitemplacas.com.br/img/produtos/g/36-atencao-area-de-teste.jpg\"\r\n}",
+									"raw": "{\r\n    \"content\": \"Top 10 primos de alírio\",\r\n    \"authorId\": 4,\r\n    \"imgSource\": \"https://aquitemplacas.com.br/img/produtos/g/36-atencao-area-de-teste.jpg\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
+								},
+								"url": {
+									"raw": "{{url}}/posts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with image",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "content",
+											"value": "teste",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/sergiocruzfilho/Desktop/Screen Shot 2023-07-19 at 10.45.39.png"
+										}
+									]
 								},
 								"url": {
 									"raw": "{{url}}/posts",
@@ -554,7 +673,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "3"
 										}
 									]
 								}
@@ -572,7 +691,32 @@
 					"name": "Create story",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/Users/sergiocruzfilho/Desktop/Screen Shot 2023-07-19 at 10.45.39.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/story",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"story"
+							]
+						}
 					},
 					"response": []
 				},
@@ -580,7 +724,22 @@
 					"name": "View all stories",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/stories",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stories"
+							]
+						}
 					},
 					"response": []
 				},
@@ -588,7 +747,29 @@
 					"name": "View story",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/story/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"story",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -612,7 +793,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/wines?offset=0&limit=10",
+									"raw": "{{url}}/wines?offset=0&limit=10&search=jean",
 									"host": [
 										"{{url}}"
 									],
@@ -630,8 +811,7 @@
 										},
 										{
 											"key": "search",
-											"value": "jean",
-											"disabled": true
+											"value": "jean"
 										}
 									]
 								}
@@ -697,7 +877,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "4"
+											"value": "3"
 										}
 									]
 								}
@@ -765,7 +945,32 @@
 					"name": "sugest wine",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"prompt\": \"Me recomende 3 vinhos citricos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/wines/sugest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"wines",
+								"sugest"
+							]
+						}
 					},
 					"response": []
 				}

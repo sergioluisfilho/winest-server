@@ -13,10 +13,11 @@ export const login = async ({ email, password }) => {
         id: true,
         name: true,
         email: true,
+        profilePictureUrl: true,
         birthday: true,
         phone: true,
         bio: true,
-        password: false, // Exclui o campo de senha
+        // password: false, // Exclui o campo de senha
         FavoriteWine: true,
         Post: true,
       },

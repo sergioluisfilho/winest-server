@@ -41,6 +41,7 @@ export const listPosts = async ({ offset, limit }) => {
           select: {
             id: true,
             name: true,
+            profilePictureUrl: true,
           },
         },
         Comment: {
