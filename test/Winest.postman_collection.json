@@ -317,7 +317,7 @@
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/Users/sergiocruzfilho/Desktop/demo.mov"
+											"src": []
 										}
 									]
 								},
@@ -489,7 +489,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3"
+											"value": "4"
 										}
 									]
 								}
@@ -572,13 +572,19 @@
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"Top 10 primos de alírio\",\r\n    \"authorId\": 4,\r\n    \"imgSource\": \"https://aquitemplacas.com.br/img/produtos/g/36-atencao-area-de-teste.jpg\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "content",
+											"value": "Minha nova foto de perfil",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/private/var/folders/pf/hdx66kkx1dgfzjxrp0_2x9mw0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=6BB98538-FB7D-4559-A808-D9CF2905C3EE&mode=compatible&noloc=0.jpeg/2DD601F5-F4E2-45A7-AAA0-C0DEB1FBAEFD.jpeg"
 										}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{url}}/posts",
