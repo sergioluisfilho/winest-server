@@ -2,7 +2,8 @@ import { createPost, listPosts } from "../services/post";
 
 class PostController {
   static async create(req, res) {
-    const { status, data } = await createPost(req.body, req.file?.location);
+    const { id } = req.user;
+    const { status, data } = await createPost(id, req.body, req.file?.location);
     return res.status(status).send(data);
   }
 

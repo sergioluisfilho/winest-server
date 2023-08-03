@@ -1,13 +1,13 @@
 import { prisma } from "../db/prisma";
 
-export const createPost = async ({ content, authorId }, image) => {
+export const createPost = async (id, { content }, image) => {
   try {
     const post = await prisma.post.create({
       data: {
         content,
         author: {
           connect: {
-            id: +authorId,
+            id,
           },
         },
         imgSource: image,
@@ -32,6 +32,9 @@ export const listPosts = async ({ offset, limit }) => {
     const posts = await prisma.post.findMany({
       skip: +offset,
       take: +limit,
+      orderBy: {
+        id: "desc", // Ordenar por data de criação de forma decrescente
+      },
       select: {
         id: true,
         createdAt: true,
