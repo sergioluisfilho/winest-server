@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sergio@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"sergioluisfilho@hotmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -317,7 +317,7 @@
 										{
 											"key": "image",
 											"type": "file",
-											"src": []
+											"src": "/private/var/folders/pf/hdx66kkx1dgfzjxrp0_2x9mw0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=4D394EF0-0843-4E7B-AC98-182CFB617E3D&mode=compatible&noloc=0.jpeg/IMG_5078.jpeg"
 										}
 									]
 								},
@@ -554,6 +554,11 @@
 										{
 											"key": "limit",
 											"value": "20"
+										},
+										{
+											"key": "userId",
+											"value": "1ß",
+											"disabled": true
 										}
 									]
 								}
@@ -597,49 +602,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Create with image",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "content",
-											"value": "teste",
-											"type": "text"
-										},
-										{
-											"key": "authorId",
-											"value": "4",
-											"type": "text"
-										},
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/Users/sergiocruzfilho/Desktop/Screen Shot 2023-07-19 at 10.45.39.png"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/posts",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"posts"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -659,7 +621,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"Adorei o post!\"\r\n}",
+									"raw": "{\r\n    \"content\": \"gostei muito da aula\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -679,7 +641,54 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3"
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View post comments",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"gostei muito da aula\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/posts/:id/comments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id",
+										"comments"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "14"
+										},
+										{
+											"key": "id",
+											"value": "14"
 										}
 									]
 								}
@@ -799,7 +808,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/wines?offset=0&limit=10&search=jean",
+									"raw": "{{url}}/wines?offset=0&limit=10",
 									"host": [
 										"{{url}}"
 									],
@@ -817,7 +826,8 @@
 										},
 										{
 											"key": "search",
-											"value": "jean"
+											"value": "jean",
+											"disabled": true
 										}
 									]
 								}
