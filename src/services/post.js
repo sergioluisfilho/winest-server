@@ -27,7 +27,7 @@ export const createPost = async (id, { content }, image) => {
   }
 };
 
-export const listPosts = async ({ offset, limit }) => {
+export const listPosts = async ({ offset, limit, userId }) => {
   try {
     const posts = await prisma.post.findMany({
       skip: +offset,
@@ -35,6 +35,7 @@ export const listPosts = async ({ offset, limit }) => {
       orderBy: {
         id: "desc", // Ordenar por data de criação de forma decrescente
       },
+      where: userId ? { authorId: +userId } : undefined,
       select: {
         id: true,
         createdAt: true,

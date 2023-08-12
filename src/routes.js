@@ -31,6 +31,7 @@ routes.post("/posts", authorize, upload.single("image"), PostController.create);
 routes.get("/posts", authorize, PostController.show);
 routes.post("/posts/:id/like", authorize, LikeController.like);
 routes.delete("/posts/:id/like", authorize, LikeController.unlike);
+routes.get("/posts/:id/comments", authorize, CommentController.seeComments);
 routes.post("/posts/:id/comments", authorize, CommentController.createComment);
 routes.get("/", (req, res) => res.send("Connected"));
 routes.get("/chats", authorize, ChatController.show);
