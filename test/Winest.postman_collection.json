@@ -808,7 +808,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/wines?offset=0&limit=10",
+									"raw": "{{url}}/wines?offset=0&limit=3&search=Quinta dos A",
 									"host": [
 										"{{url}}"
 									],
@@ -822,12 +822,11 @@
 										},
 										{
 											"key": "limit",
-											"value": "10"
+											"value": "3"
 										},
 										{
 											"key": "search",
-											"value": "jean",
-											"disabled": true
+											"value": "Quinta dos A"
 										}
 									]
 								}
