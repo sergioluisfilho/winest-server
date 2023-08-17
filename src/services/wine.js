@@ -55,11 +55,14 @@ export const getWine = async (id) => {
   }
 };
 
-export const getOpenAiSugestion = async (text) => {
+export const getOpenAiSugestion = async () => {
+  const text =
+    "Vi aqui que sua conta não possui nenhum vinho na lista de favoritos para me ajudar. Portanto, aqui está um guia de vinhos recomendados para iniciantes.";
+  const prompt = `Recomende melhores vinhos para iniciantes, utilize numeração na lista e traga alem do nome, uma breve descrição e o motivo pelo qual iniciantes costumam gostar. Inclua esse prompt no começo de todas as respostas ${text}`;
   try {
     const chatCompletion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: text }],
+      messages: [{ role: "user", content: prompt }],
     });
     console.log(chatCompletion.data.choices[0].message);
     return {
