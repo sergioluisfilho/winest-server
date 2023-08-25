@@ -437,7 +437,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/users/search?term=marcos",
+									"raw": "{{url}}/users/search?term=s",
 									"host": [
 										"{{url}}"
 									],
@@ -448,7 +448,7 @@
 									"query": [
 										{
 											"key": "term",
-											"value": "marcos"
+											"value": "s"
 										}
 									]
 								}
@@ -539,7 +539,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/posts?offset=0&limit=20",
+									"raw": "{{url}}/posts?offset=40&limit=20",
 									"host": [
 										"{{url}}"
 									],
@@ -549,7 +549,7 @@
 									"query": [
 										{
 											"key": "offset",
-											"value": "0"
+											"value": "40"
 										},
 										{
 											"key": "limit",
@@ -650,9 +650,6 @@
 						},
 						{
 							"name": "View post comments",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -662,15 +659,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"content\": \"gostei muito da aula\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{url}}/posts/:id/comments",
 									"host": [
@@ -684,11 +672,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "14"
-										},
-										{
-											"key": "id",
-											"value": "14"
+											"value": "2"
 										}
 									]
 								}
@@ -808,7 +792,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/wines?offset=0&limit=3&search=Quinta dos A",
+									"raw": "{{url}}/wines?offset=100&limit=10&search=a",
 									"host": [
 										"{{url}}"
 									],
@@ -818,15 +802,15 @@
 									"query": [
 										{
 											"key": "offset",
-											"value": "0"
+											"value": "100"
 										},
 										{
 											"key": "limit",
-											"value": "3"
+											"value": "10"
 										},
 										{
 											"key": "search",
-											"value": "Quinta dos A"
+											"value": "a"
 										}
 									]
 								}
