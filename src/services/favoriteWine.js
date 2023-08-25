@@ -3,6 +3,13 @@ import { prisma } from "../db/prisma";
 export const favorites = async (id) => {
   try {
     const favoriteWines = await prisma.favoriteWine.findMany({
+      select: {
+        id: true,
+        wine: true,
+        createdAt: true,
+        userId: true,
+        wineId: true,
+      },
       where: {
         userId: id,
       },
