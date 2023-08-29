@@ -1,4 +1,5 @@
 import { getWines, getWine, getOpenAiSugestion } from "../services/wine";
+import { favorites } from "../services/favoriteWine";
 
 class WineController {
   static async index(req, res) {
@@ -13,8 +14,9 @@ class WineController {
   }
 
   static async sugest(req, res) {
-    const { prompt } = req.body;
-    const { status, data } = await getOpenAiSugestion(prompt);
+    const { id } = req.user;
+    const { data: favoriteWines } = await favorites(id);
+    const { status, data } = await getOpenAiSugestion(id, favoriteWines);
     return res.status(status).send(data);
   }
 }

@@ -55,16 +55,29 @@ export const getWine = async (id) => {
   }
 };
 
-export const getOpenAiSugestion = async () => {
-  const text =
-    "Vi aqui que sua conta não possui nenhum vinho na lista de favoritos para me ajudar. Portanto, aqui está um guia de vinhos recomendados para iniciantes.";
-  const prompt = `Recomende melhores vinhos para iniciantes, utilize numeração na lista e traga alem do nome, uma breve descrição e o motivo pelo qual iniciantes costumam gostar. Inclua esse prompt no começo de todas as respostas ${text}`;
+export const getOpenAiSugestion = async (userId, { favoriteWines }) => {
+  let text;
+  let prompt;
+  let descriptions = favoriteWines
+    .map(({ wine }) => {
+      return wine.title + ": " + wine.description;
+    })
+    .join(" ");
+
+  if (favoriteWines.length === 0) {
+    text =
+      "Vi aqui que sua conta não possui nenhum vinho na lista de favoritos para me ajudar. Portanto, aqui está um guia de vinhos recomendados para iniciantes.";
+    prompt = `Recomende melhores vinhos para iniciantes, utilize numeração na lista e traga alem do nome, uma breve descrição e o motivo pelo qual iniciantes costumam gostar. Inclua esse prompt no começo de todas as respostas ${text}`;
+  } else {
+    prompt = `Recomende vinhos baseados nessas descricoes para o gosto do usuario mas nao inclua os citados nesse prompt: ${descriptions}; utilize numeração na lista  numeração na lista e traga alem do nome, uma breve descrição e o motivo pelo qual iniciantes costumam gostar.`;
+  }
+
   try {
     const chatCompletion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
     });
-    console.log(chatCompletion.data.choices[0].message);
+
     return {
       status: 200,
       data: chatCompletion.data.choices[0].message,
